@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.tech.report.management.file.util.FileUtil;
 import com.tech.report.management.jrxml.pdf.PdfUtil;
 import com.tech.report.management.student.dto.StudentInfo;
 import com.tech.report.management.student.dto.StudentMarks;
@@ -34,7 +35,7 @@ public class StudentReport {
 		Map<String, Object> parameters= loadParameters();
 		try {
 			JasperPrint pdfPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
-			JasperExportManager.exportReportToPdfFile(pdfPrint, file_path+"\\studentReport.pdf");
+			JasperExportManager.exportReportToPdfFile(pdfPrint, FileUtil.DEST_FILE_PATH+FileUtil.STD_FINAL_REPORT_NAME+"1"+FileUtil.PDF_FILE_EXT);
 			_logger.info("Report generated successfully");
 		} catch (JRException e) {
 			_logger.error("Exception occure while generate Report");
